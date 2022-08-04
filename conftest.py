@@ -15,9 +15,6 @@ chrome_only = pytest.mark.parametrize("browser_select", ["chrome"], indirect=Tru
 firefox_only = pytest.mark.parametrize("browser_select", ["firefox"], indirect=True)
 
 
-'''
-На каких браузерах запускаются тесты
-'''
 @pytest.fixture(params=["chrome", "firefox"])
 def browser_select(request):
     return request.param
@@ -26,6 +23,7 @@ def browser_select(request):
 @pytest.fixture(scope='function', autouse=True)
 def driver_init(browser_select):
 
+    #Лучше спрятать куда-нибудь, но для дз сойдет
     os.environ['GH_TOKEN'] = os.getenv('token')
 
     browser.config.browser_name = browser_select
