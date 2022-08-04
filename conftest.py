@@ -2,6 +2,12 @@ import os
 import pytest
 from selene.support.shared import browser
 from utils import attach
+from dotenv import load_dotenv
+
+
+@pytest.fixture(scope='session', autouse=True)
+def load_env():
+    load_dotenv()
 
 
 chrome_only = pytest.mark.parametrize("browser_select", ["chrome"], indirect=True)
@@ -20,7 +26,7 @@ def browser_select(request):
 @pytest.fixture(scope='function', autouse=True)
 def driver_init(browser_select):
 
-    os.environ['GH_TOKEN'] = "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"
+    os.environ['GH_TOKEN'] = os.getenv('token')
 
     browser.config.browser_name = browser_select
     browser.config.base_url = 'https://github.com'
