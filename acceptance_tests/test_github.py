@@ -1,13 +1,13 @@
-import time
-
-import allure
 import pytest
 import allure
 from allure_commons.types import Severity
 from selene.support.shared.jquery_style import s, ss
+
+from conftest import chrome_only
 from helpers.help_modul import url_open_size
 
 
+@chrome_only
 @pytest.mark.parametrize("width, height",
                          [
                              pytest.param(1920, 1366),
@@ -15,7 +15,8 @@ from helpers.help_modul import url_open_size
                              pytest.param(800, 600, marks=[pytest.mark.skip(reason="В процессе разработки")])
                          ]
                          )
-def test_one(width, height):
+def test_one(width, height, browser_select):
+    assert browser_select in "Chrome from fixture"
     allure.dynamic.tag("Web application")
     allure.dynamic.severity(Severity.CRITICAL)
     allure.dynamic.feature("Тесты automation-practice-form")

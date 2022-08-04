@@ -9,6 +9,16 @@ from webdriver_manager.core import driver
 from utils import attach
 from selene import Browser, Config
 
+'''
+Есть переменная называемая Hook
+'''
+chrome_only = pytest.mark.parametrize("browser_select", ["Chrome"], indirect=True)
+
+
+@pytest.fixture(params=["Chrome", "Firefox"])
+def browser_select(request):
+    return request.param + " from fixture"
+
 
 @pytest.fixture(scope='function', autouse=True)
 def driver_init():
