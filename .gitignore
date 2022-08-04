@@ -35,5 +35,3 @@ venv*/
 allure-results*/
 
 .env
-
-config.properties
