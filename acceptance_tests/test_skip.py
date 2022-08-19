@@ -15,7 +15,7 @@ from helpers.help_modul import url_open_size
                              pytest.param(800, 600, marks=[pytest.mark.skip(reason="В процессе разработки")])
                          ]
                          )
-def test_one(width, height):
+def test_github_desktop(width, height):
     allure.dynamic.tag("Web application")
     allure.dynamic.severity(Severity.CRITICAL)
     allure.dynamic.feature("Тесты automation-practice-form")
@@ -29,20 +29,6 @@ def test_one(width, height):
 
 
 @firefox_only
-def test_two():
-    allure.dynamic.tag("Web application")
-    allure.dynamic.severity(Severity.CRITICAL)
-    allure.dynamic.feature("Тесты automation-practice-form")
-    allure.dynamic.story("Проверка отправленных данных в таблице через форму")
-
-    with allure.step('Открываем github.com'):
-        url_open_size()
-
-    with allure.step('Клик по кнопке Sign in'):
-        s('[href="/login"]').click()
-
-
-@chrome_only
 @pytest.mark.parametrize("width, height",
                          [
                              pytest.param(375, 667),
@@ -51,7 +37,7 @@ def test_two():
                                                                                     "десктопным")]),
                          ]
                          )
-def test_one_mobile(width, height):
+def test_github_mobile(width, height):
     allure.dynamic.tag("Web application mobile")
     allure.dynamic.severity(Severity.CRITICAL)
     allure.dynamic.feature("Тесты automation-practice-form")

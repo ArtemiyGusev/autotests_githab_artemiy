@@ -1,8 +1,24 @@
 import os
+
+import allure
 import pytest
 from selene.support.shared import browser
+
+from helpers.help_modul import url_open_size
 from utils import attach
 from dotenv import load_dotenv
+
+
+@pytest.fixture()
+def desktop_only():
+    with allure.step('Открываем github.com'):
+        url_open_size()
+
+
+@pytest.fixture()
+def mobile_only():
+    with allure.step('Открываем github.com'):
+        url_open_size(600, 800)
 
 
 @pytest.fixture(scope='session', autouse=True)
@@ -11,7 +27,6 @@ def load_env():
 
 
 chrome_only = pytest.mark.parametrize("browser_select", ["chrome"], indirect=True)
-
 firefox_only = pytest.mark.parametrize("browser_select", ["firefox"], indirect=True)
 
 
